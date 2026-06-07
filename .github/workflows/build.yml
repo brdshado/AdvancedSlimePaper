@@ -23,7 +23,7 @@ jobs:
       - name: Apply Patches
         run: ./gradlew applyAllPatches --no-daemon
       - name: Build with Gradle
-        run: ./gradlew createReobfPaperclipJar --no-daemon
+        run: ./gradlew createMojmapPaperclipJar --no-daemon
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
