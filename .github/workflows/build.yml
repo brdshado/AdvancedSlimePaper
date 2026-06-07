@@ -25,7 +25,9 @@ jobs:
       - name: Apply Patches
         run: ./gradlew applyAllPatches --no-daemon
       - name: Build with Gradle
-        run: ./gradlew createMojmapPaperclipJar --no-daemon
+        run: |
+          ./gradlew createMojmapPaperclipJar --no-daemon
+          ./gradlew plugin:build -x test --no-daemon
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -35,6 +37,7 @@ jobs:
             aspaper-server/build/libs/*-paperclip.jar
             build/libs/*mojmap*.jar
             aspaper-server/build/libs/*mojmap*.jar
+            plugin/build/libs/asp-plugin-*.jar
       - name: Create Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
@@ -47,3 +50,4 @@ jobs:
             aspaper-server/build/libs/*-paperclip.jar
             build/libs/*mojmap*.jar
             aspaper-server/build/libs/*mojmap*.jar
+            plugin/build/libs/asp-plugin-*.jar
