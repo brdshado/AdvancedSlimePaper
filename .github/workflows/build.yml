@@ -28,4 +28,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ASPaper-Server-Jar
-          path: aspaper-server/build/libs/*-paperclip.jar
+          path: |
+            build/libs/*-paperclip.jar
+            aspaper-server/build/libs/*-paperclip.jar
+            build/libs/*mojmap*.jar
+            aspaper-server/build/libs/*mojmap*.jar
