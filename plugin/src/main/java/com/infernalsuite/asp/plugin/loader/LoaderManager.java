@@ -6,6 +6,7 @@ import com.infernalsuite.asp.loaders.api.APILoader;
 import com.infernalsuite.asp.loaders.file.FileLoader;
 import com.infernalsuite.asp.loaders.mongo.MongoLoader;
 import com.infernalsuite.asp.loaders.mysql.MysqlLoader;
+import com.infernalsuite.asp.loaders.postgres.PostgresLoader;
 import com.infernalsuite.asp.loaders.redis.RedisLoader;
 import com.mongodb.MongoException;
 import io.lettuce.core.RedisException;
@@ -43,6 +44,21 @@ public class LoaderManager {
                 ));
             } catch (final SQLException ex) {
                 LOGGER.error("Failed to establish connection to the MySQL server:", ex);
+            }
+        }
+
+        // Postgres loader
+        com.infernalsuite.asp.plugin.config.DatasourcesConfig.PostgresConfig postgresConfig = config.getPostgresConfig();
+        if (postgresConfig.isEnabled()) {
+            try {
+                registerLoader("postgres", new PostgresLoader(
+                        postgresConfig.getSqlUrl(),
+                        postgresConfig.getHost(), postgresConfig.getPort(),
+                        postgresConfig.getDatabase(), postgresConfig.isUsessl(),
+                        postgresConfig.getUsername(), postgresConfig.getPassword()
+                ));
+            } catch (final SQLException ex) {
+                LOGGER.error("Failed to establish connection to the PostgreSQL server:", ex);
             }
         }
 

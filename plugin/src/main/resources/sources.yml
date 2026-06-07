@@ -26,3 +26,11 @@ api:
   username: ''
   token: ''
   url: ''
+postgres:
+  enabled: true
+  host: 127.0.0.1
+  port: 5432
+  username: slimeworldmanager
+  password: ''
+  database: slimeworldmanager
+  usessl: false

@@ -31,3 +31,6 @@ include("loaders:mysql-loader")
 findProject(":loaders:mysql-loader")?.name = "mysql-loader"
 include("loaders:redis-loader")
 findProject(":loaders:redis-loader")?.name = "redis-loader"
+
+include("loaders:postgres-loader")
+findProject(":loaders:postgres-loader")?.name = "postgres-loader"
