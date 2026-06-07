@@ -52,10 +52,8 @@ public class PostgresLoader extends UpdatableLoader {
         hikariConfig.setPassword(password);
         hikariConfig.setDriverClassName("org.postgresql.Driver");
 
-        hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
-        hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
-        hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
+        // Postgres JDBC does not support mysql-specific properties like cachePrepStmts
+        
         source = new HikariDataSource(hikariConfig);
         init();
     }
