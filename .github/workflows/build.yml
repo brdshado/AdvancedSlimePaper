@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,6 +31,18 @@ jobs:
         with:
           name: ASPaper-Server-Jar
           path: |
+            build/libs/*-paperclip.jar
+            aspaper-server/build/libs/*-paperclip.jar
+            build/libs/*mojmap*.jar
+            aspaper-server/build/libs/*mojmap*.jar
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "latest"
+          name: "Latest ASPaper Build"
+          body: "Automated build of ASPaper from commit ${{ github.sha }}"
+          files: |
             build/libs/*-paperclip.jar
             aspaper-server/build/libs/*-paperclip.jar
             build/libs/*mojmap*.jar
